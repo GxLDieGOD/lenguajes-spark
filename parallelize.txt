@@ -1,0 +1,23 @@
+def my_func(iterator): yield sum(iterator)
+  
+
+list = range(1,10)
+
+parallel = sc.parallelize(list, 5)
+
+parallel.mapPartitions(my_func).collect()
+
+ [1, 5, 9, 13, 17]
+
+
+--------------------------------
+
+>>> rdd = sc.parallelize([4, 1, 2, 6, 1, 5, 3, 3, 2, 4])
+
+>>> rdd.takeOrdered(5)
+
+[1, 1, 2, 2, 3]
+
+>>> rdd.takeOrdered(5, lambda x:  -x)
+
+[6, 5, 4, 4, 3]
